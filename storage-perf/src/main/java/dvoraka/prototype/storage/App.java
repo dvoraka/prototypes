@@ -30,6 +30,8 @@ public class App {
 
             System.out.println("App");
 
+            service.save(new Author());
+
             for (Author author : service.findAll()) {
                 System.out.println(author);
             }

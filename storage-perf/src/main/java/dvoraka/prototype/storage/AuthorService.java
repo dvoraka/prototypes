@@ -18,4 +18,8 @@ public class AuthorService {
     public Iterable<Author> findAll() {
         return repository.findAll();
     }
+
+    public Author save(Author author) {
+        return repository.save(author);
+    }
 }
