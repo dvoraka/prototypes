@@ -1,0 +1,52 @@
+buildscript {
+    ext {
+        springBootVersion = '2.0.0.M2'
+    }
+    repositories {
+        mavenCentral()
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+ext['spring-cloud-commons.version'] = '2.0.0.M1'
+ext['spring-cloud-netflix.version'] = '2.0.0.M1'
+
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'idea'
+
+version = '0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Dalston.SR1"
+    }
+}
+
+dependencies {
+    // Spring starter web
+    compile('org.springframework.boot:spring-boot-starter-web')
+    // Spring starter websocket
+    compile('org.springframework.boot:spring-boot-starter-websocket')
+
+    compile('org.springframework.cloud:spring-cloud-starter-eureka-server')
+
+    // Spring starter test
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    // Spock
+    testCompile('org.spockframework:spock-core:1.1-groovy-2.4')
+    testCompile('org.spockframework:spock-spring:1.1-groovy-2.4')
+}
